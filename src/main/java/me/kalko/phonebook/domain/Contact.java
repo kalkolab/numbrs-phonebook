@@ -1,0 +1,71 @@
+package me.kalko.phonebook.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Contact {
+
+    private int id;
+
+    @JsonIgnore
+    private int userId;
+
+    @JsonProperty("first_name")
+    private String firstName;
+
+    @JsonProperty("last_name")
+    private String lastName;
+
+    private List<String> phones;
+
+    public Contact(@JsonProperty("first_name") String firstName, @JsonProperty("last_name") String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phones = new ArrayList<>();
+    }
+
+    public Contact(int id, int userId, String firstName, String lastName) {
+        this.id = id;
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phones = new ArrayList<>();
+    }
+
+    public Contact(int id, int userId, String firstName, String lastName, List<String> phones) {
+        this.id = id;
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phones = phones;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public List<String> getPhones() {
+        return phones;
+    }
+
+    public void addPhone(String phone) {
+        if (StringUtils.isNotEmpty(phone) && !phones.contains(phone))
+            phones.add(phone);
+    }
+}
