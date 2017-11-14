@@ -32,7 +32,11 @@ Using your preferred language write the backend service that implements the API 
 
 
 ### USAGE
-java -jar phonebook-1.0.jar server config.yaml
+Compile and package jar:
+mvn clean package
+
+Run server:
+java -jar target/phonebook-1.0.jar server config.yaml
 
 * HTTPS connection is used on port 8080
 * three resources available

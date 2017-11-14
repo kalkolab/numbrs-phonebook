@@ -1,6 +1,5 @@
 package me.kalko.phonebook;
 
-import com.google.common.collect.Lists;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,10 +13,7 @@ import java.security.Key;
 import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,6 +60,6 @@ public class Utils {
     }
 
     public static List<String> deserializeList(String string) {
-        return StringUtils.isNoneEmpty(string) ? Lists.newArrayList(string.split(DELIMITER)) : Lists.newArrayList();
+        return StringUtils.isNoneEmpty(string) ? new ArrayList(Arrays.asList(string.split(DELIMITER))) : new ArrayList();
     }
 }

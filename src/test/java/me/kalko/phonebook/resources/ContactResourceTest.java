@@ -1,6 +1,5 @@
 package me.kalko.phonebook.resources;
 
-import com.google.common.collect.Lists;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -21,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,7 +56,7 @@ public class ContactResourceTest {
 
     @Test
     public void getContact() throws Exception {
-        List<Contact> contactList = Lists.newArrayList(new Contact(0, 0, "name", "lastname"),
+        List<Contact> contactList = Arrays.asList(new Contact(0, 0, "name", "lastname"),
                 new Contact(1, 0, "name2", "lastname2"));
         when(CONTACT_DAO.getContacts(0L)).thenReturn(contactList);
 
