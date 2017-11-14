@@ -32,10 +32,14 @@ public class UserResource {
     @POST
     @Path("/user")
     public Response login(User user) {
-        userService.authenticate(user.getName(), user.getPassword());
-        String token = Utils.issueToken(user.getName(), uriInfo);
+        try {
+            userService.authenticate(user.getName(), user.getPassword());
+            String token = Utils.issueToken(user.getName(), uriInfo);
 
-        return Response.status(Response.Status.CREATED).entity(new Token(token)).build();
+            return Response.status(Response.Status.CREATED).entity(new Token(token)).build();
+        } catch (SecurityException e) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorBean(Response.Status.UNAUTHORIZED.getStatusCode(), e.getMessage())).build();
+        }
     }
 
     @POST

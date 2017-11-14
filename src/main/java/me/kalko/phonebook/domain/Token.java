@@ -7,7 +7,7 @@ public class Token {
     @JsonProperty
     public final String token;
 
-    public Token(String token) {
-        this.token = token;
+    public Token(@JsonProperty("token") String tok) {
+        this.token = tok;
     }
 }

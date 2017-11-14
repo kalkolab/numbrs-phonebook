@@ -12,7 +12,7 @@ public abstract class UserService {
     private static final String USER_EXISTS = "User %s already exists.";
 
     @CreateSqlObject
-    abstract UserDao userDao();
+    protected abstract UserDao userDao();
 
     public User getUser(String login) {
         User user = userDao().getUser(login);
