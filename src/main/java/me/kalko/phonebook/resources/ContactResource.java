@@ -1,6 +1,5 @@
 package me.kalko.phonebook.resources;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import io.dropwizard.auth.Auth;
 import me.kalko.phonebook.domain.Contact;
 import me.kalko.phonebook.domain.IdWrapper;
@@ -8,13 +7,10 @@ import me.kalko.phonebook.domain.Phone;
 import me.kalko.phonebook.domain.User;
 import me.kalko.phonebook.domain.dao.ContactService;
 
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 @Path("/contacts")
 @Produces(MediaType.APPLICATION_JSON)
@@ -49,7 +45,7 @@ public class ContactResource {
             return Response.status(Response.Status.NOT_FOUND).entity("{}").build();
         }
         if (contact.getUserId() != user.getId()) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("{}").build();
+            return Response.status(Response.Status.FORBIDDEN).entity("{}").build();
         }
         return Response.ok().entity(contact).build();
     }
@@ -62,7 +58,7 @@ public class ContactResource {
             return Response.status(Response.Status.NOT_FOUND).entity("{}").build();
         }
         if (contact.getUserId() != user.getId()) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("{}").build();
+            return Response.status(Response.Status.FORBIDDEN).entity("{}").build();
         }
         contact = contactService.updateContact(contactId, updatedContact);
         return Response.ok().entity(new IdWrapper(contactId)).build();
@@ -76,7 +72,7 @@ public class ContactResource {
             return Response.status(Response.Status.NOT_FOUND).entity("{}").build();
         }
         if (contact.getUserId() != user.getId()) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("{}").build();
+            return Response.status(Response.Status.FORBIDDEN).entity("{}").build();
         }
         contactService.deleteContact(contactId);
         return Response.ok().build();
@@ -90,7 +86,7 @@ public class ContactResource {
             return Response.status(Response.Status.NOT_FOUND).entity("{}").build();
         }
         if (contact.getUserId() != user.getId()) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("{}").build();
+            return Response.status(Response.Status.FORBIDDEN).entity("{}").build();
         }
         contact.addPhone(phone.getPhone());
         contact = contactService.updateContact(contactId, contact);
