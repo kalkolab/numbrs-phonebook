@@ -1,9 +1,10 @@
 package me.kalko.phonebook;
 
+import com.google.common.collect.Lists;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,10 @@ import java.security.Key;
 import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,6 +40,9 @@ public class Utils {
         return jwtToken;
     }
 
+    public static Claims parseToken(String token) {
+        return Jwts.parser().setSigningKey(Utils.KEY).parseClaimsJws(token).getBody();
+    }
 
     public static String digestPassword(String plainTextPassword) {
         try {

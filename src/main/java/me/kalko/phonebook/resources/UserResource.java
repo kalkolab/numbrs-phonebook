@@ -6,8 +6,6 @@ import me.kalko.phonebook.domain.IdWrapper;
 import me.kalko.phonebook.domain.Token;
 import me.kalko.phonebook.domain.User;
 import me.kalko.phonebook.domain.dao.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -22,8 +20,6 @@ import javax.ws.rs.core.UriInfo;
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/")
 public class UserResource {
-    private final Logger logger = LoggerFactory.getLogger(UserResource.class);
-
     private final UserService userService;
 
     @Context

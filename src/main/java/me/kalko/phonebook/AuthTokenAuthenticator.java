@@ -3,7 +3,6 @@ package me.kalko.phonebook;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import me.kalko.phonebook.domain.User;
 import me.kalko.phonebook.domain.dao.UserService;
 
@@ -19,7 +18,7 @@ public class AuthTokenAuthenticator implements Authenticator<String, User> {
 
     @Override
     public Optional<User> authenticate(String token) throws AuthenticationException {
-        Claims claims = Jwts.parser().setSigningKey(Utils.KEY).parseClaimsJws(token).getBody();
+        Claims claims = Utils.parseToken(token);
         return Optional.ofNullable(userService.getUser(claims.getSubject()));
     }
 }
