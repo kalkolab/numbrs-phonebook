@@ -68,4 +68,28 @@ public class Contact {
         if (StringUtils.isNotEmpty(phone) && !phones.contains(phone))
             phones.add(phone);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contact contact = (Contact) o;
+
+        if (id != contact.id) return false;
+        if (userId != contact.userId) return false;
+        if (firstName != null ? !firstName.equals(contact.firstName) : contact.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(contact.lastName) : contact.lastName != null) return false;
+        return phones != null ? phones.equals(contact.phones) : contact.phones == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + userId;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (phones != null ? phones.hashCode() : 0);
+        return result;
+    }
 }

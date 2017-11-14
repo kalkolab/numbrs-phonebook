@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Captor;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
@@ -36,7 +35,6 @@ public class UserResourceTest {
                 }
             }))
             .build();
-    @Captor
     private User user;
 
     @Before

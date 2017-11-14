@@ -14,7 +14,7 @@ public abstract class ContactService {
     private static final String USER_EXISTS = "Contact %s already exists.";
 
     @CreateSqlObject
-    abstract ContactDao contactDao();
+    protected abstract ContactDao contactDao();
 
     public Contact getContact(long id) {
         Contact contact = contactDao().getContact(id);

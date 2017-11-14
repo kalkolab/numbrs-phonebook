@@ -15,10 +15,7 @@ import static org.mockito.Mockito.when;
 public class UtilsTest {
     @Test
     public void token() throws Exception {
-        UriInfo mockUriInfo;
-        String url = "test";
-
-        mockUriInfo = mock(UriInfo.class);
+        UriInfo mockUriInfo = mock(UriInfo.class);
         when(mockUriInfo.getAbsolutePath()).thenReturn(new URI("http://localhost"));
 
         String issuedToken = Utils.issueToken("test", mockUriInfo);

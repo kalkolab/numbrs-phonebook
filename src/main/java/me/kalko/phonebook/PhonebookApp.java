@@ -36,9 +36,9 @@ public class PhonebookApp extends Application<PhonebookConfiguration> {
                 configuration.getDataSourceFactory().build(environment.metrics(), "sql");
         DBI dbi = new DBI(dataSource);
 
-        AuthFilter basicAuthFilter = new JwtAuthFilter(dbi.onDemand(UserService.class));
+        AuthFilter jwtAuthFilter = new JwtAuthFilter(dbi.onDemand(UserService.class));
 
-        environment.jersey().register(new AuthDynamicFeature(basicAuthFilter));
+        environment.jersey().register(new AuthDynamicFeature(jwtAuthFilter));
         environment.jersey().register(new AuthValueFactoryProvider.Binder(User.class));
 
         environment.jersey().register(new UserResource(dbi.onDemand(UserService.class)));
