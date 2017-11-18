@@ -29,7 +29,7 @@ public abstract class UserService {
 
     public void authenticate(String name, String password) {
         User user = getUser(name);
-        if (!user.getPassword().equals(Utils.digestPassword(password))) {
+        if (user == null || !user.getPassword().equals(Utils.digestPassword(password))) {
             throw new SecurityException("Invalid username/password");
         }
     }

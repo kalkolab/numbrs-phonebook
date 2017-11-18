@@ -12,9 +12,11 @@ import me.kalko.phonebook.domain.dao.ContactService;
 import me.kalko.phonebook.domain.dao.UserService;
 import me.kalko.phonebook.resources.ContactResource;
 import me.kalko.phonebook.resources.UserResource;
+import org.h2.tools.RunScript;
 import org.skife.jdbi.v2.DBI;
 
 import javax.sql.DataSource;
+import java.io.InputStreamReader;
 
 /**
  * Hello world!
@@ -34,6 +36,11 @@ public class PhonebookApp extends Application<PhonebookConfiguration> {
     public void run(PhonebookConfiguration configuration, Environment environment) throws Exception {
         final DataSource dataSource =
                 configuration.getDataSourceFactory().build(environment.metrics(), "sql");
+
+        try (InputStreamReader is = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("create.sql"))) {
+            RunScript.execute(dataSource.getConnection(), is);
+        }
+
         DBI dbi = new DBI(dataSource);
 
         AuthFilter jwtAuthFilter = new JwtAuthFilter(dbi.onDemand(UserService.class));
